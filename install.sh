@@ -30,14 +30,18 @@ RELATIVE_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 CUSTOM_CONF_PATH="$RELATIVE_PATH/custom-hypr"
 CONF_PATH="$HOME/.config/hypr"
 
+OS="Fedora"
+PACKAGE_MANAGER="dnf"
+YEAR="2025"
+
 # Jakoolit urls
-JAKOOLIT_REPO="https://github.com/JaKooLit/Fedora-Hyprland"
-JAKOOLIT_AUTO_INSTALL="https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/auto-install.sh"
+JAKOOLIT_REPO="https://github.com/JaKooLit/$OS-Hyprland"
+JAKOOLIT_AUTO_INSTALL="https://raw.githubusercontent.com/JaKooLit/Fedor$OSa-Hyprland/main/auto-install.sh"
 
 # /--------------------/ INIT /--------------------/
 
-whiptail --title "Doruo custom Fedora-Hyprland (2025) Install Script" \
-    --msgbox "Welcome to Doruo Fedora-Hyprland (2025) Install Script!\n\n\
+whiptail --title "Doruo custom $OS-Hyprland ($YEAR) Install Script" \
+    --msgbox "Welcome to Doruo $OS-Hyprland ($YEAR) Install Script!\n\n\
 Mostly taken from Jakoolit incredible setup: $JAKOOLIT_REPO"\
     15 80
 
@@ -45,24 +49,26 @@ clear
 cd $HOME
 
 # Update operating system
-echo "${INFO} Updating Fedora..."
-sudo dnf update
+echo "${INFO} Operating System: $OS"
+echo "${INFO} Updating $PACKAGE_MANAGER packages..."
+sudo $PACKAGE_MANAGER update
 
 # Install utilities
-echo "${INFO} Installing utilities for setup..."
-sudo dnf install whiptail
-sudo dnf install rsync
+UTILITIES="whiptail rsync"
+
+echo "${INFO} Installing utilities requiered for setup..."
+sudo $PACKAGE_MANAGER install $UTILITIES
 
 # /--------------------/ JAKOOLIT HYPRLAND /--------------------/
 
 # Create main directory
-echo "${INFO} Creating Fedora-Hyprland directory..."
-mkdir $HOME/Fedora-Hyprland
+echo "${INFO} Creating $OS-Hyprland directory..."
+mkdir $HOME/$OS-Hyprland
 
 # Install jakoolit
-echo "${INFO} Installing Jakoolit Fedora Hyprland..."
-git clone --depth=1 $JAKOOLIT_REPO.git $HOME/Fedora-Hyprland
-cd $HOME/Fedora-Hyprland
+echo "${INFO} Installing Jakoolit $OS Hyprland..."
+git clone --depth=1 $JAKOOLIT_REPO.git $HOME/$OS-Hyprland
+cd $HOME/$OS-Hyprland
 chmod +x install.sh
 ./install.sh
 
@@ -185,7 +191,7 @@ if [ $CHOICE_INSTALL_DEV_SOFT -eq 0 ]; then
 
     for software in $SOFTWARES; do
         echo "Installing software: $software..."
-        sudo dnf install $software
+        sudo $PACKAGE_MANAGER install $software
     done
 else
     echo -e "\n"
@@ -203,7 +209,7 @@ if [ $CHOICE_INSTALL_DEV_LANG -eq 0 ]; then
 
     for langage in $DEV_LANGS; do
         echo "Installing programming langage: $langage..."
-        sudo dnf install $langage
+        sudo $PACKAGE_MANAGER install $langage
     done
 else
     echo -e "\n"
@@ -216,7 +222,7 @@ fi
 if [ $CHOICE_INSTALL_DISCORD -eq 0 ]; then
     echo -e "\n"
     echo "${INFO} You chose to install Discord. ${YELLOW}Installing...${RESET}"
-    sudo dnf install discord 
+    sudo $PACKAGE_MANAGER install discord 
 else
     echo -e "\n"
     echo "${INFO} You chose ${YELLOW}NOT${RESET} to install Discord."
@@ -229,7 +235,7 @@ if [ $CHOICE_REBOOT_AFTER_INSTALL -eq 0 ]; then
     echo -e "\n"
     echo "${INFO} You chose to reboot when finished."
     echo -e "\n"
-    echo -e "${INFO} ${YELLOW}Rebooting your computer in $DELAY_BEFORE_REBOOT seconds...${RESET}"
+    echo -e "${INFO} ${YELLOW}Rebooting $OS, starting in $DELAY_BEFORE_REBOOT seconds...${RESET}"
     sleep $DELAY_BEFORE_REBOOT
     reboot
 else
@@ -238,4 +244,4 @@ else
     echo -e "\n"
 fi
 
-echo -e "\n ${OK} ${GREEN}End of custom install.${RESET}"
+echo -e "\n ${OK} ${GREEN}End of custom install for $OS-Hyprland.${RESET}"
