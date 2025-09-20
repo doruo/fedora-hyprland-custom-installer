@@ -24,10 +24,8 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-# /-----/ - ALIASES - /-----/
-
-# Synthax:
-# a name="command"
+# /----- ALIASES -----/
+# Synthax: a name="command"
 
 # Short Utilities (sorted in a-z order)
 alias a="alias" # Shortcut to use for every aliases
@@ -46,21 +44,23 @@ a sn="s nano"
 a t="touch"
 
 # Alias settings
-a aliasc="n ~/.bashrc" # Alias change (access this file)
-a aliasg="gedit ~/.bashrc" # Alias change (gedit)
-a aliasr='source ~/.bashrc && e "Bash aliases reloaded !"' # Alias reload
+a aliasc="n $HOME/.bashrc" # Alias change (access this file)
+a aliasg="gedit $HOME/.bashrc" # Alias change (gedit)
+a aliasr='source $HOME/.bashrc && e "Bash aliases reloaded !"' # Alias reload
 a una="unalias"
 
 # /----- FILES -----/
 
+PACKAGE_MANAGER="dnf"
+
 # Package & versions managment
-a u="s dnf update"
-a i="s dnf install"
-a r="s dnf rm"
+a u="s $PACKAGE_MANAGER update"
+a i="s $PACKAGE_MANGER install"
+a r="s $PACKAGE_MANGER rm"
 a si="s snap install" # install via Snap (not recommended)
 
 # File & Directory
-a home="cd ~"
+a home="cd $HOME"
 a sys="cd /"
 a cdp="cd .."
 a cdp2="cdp;cdp"
@@ -71,6 +71,16 @@ a cdp4="cdp3;cdp"
 a isoftwares="i git; i pgadmin4; i snap; si postman"
 a ilanguages="i go; i python3"
 a idev="isoftwares; ilanguages"
+
+# /----- DOCKER -----/
+
+a d="s docker"
+a drun="d run"
+a dstop="d stop"
+a dexec="d exec -it"
+a dc="d compose"
+a dcup="dc up"
+a dps="d ps"
 
 # /----- HYPRLAND -----/
 
@@ -90,6 +100,7 @@ a cdswappy="conf && cd swappy"
 # Conf User Files Access
 a cduserconfigs="cdhypr && cd UserConfigs"
 a cduserscripts="cdhypr && cd UserScripts"
+a cdusercustomscripts="cduserscripts && cd CustomScripts"
 a ckeybinds="cduserconfigs && n UserKeybinds.conf"
 
 # Conf Files Access
@@ -111,6 +122,14 @@ a crofibeatsmenus="cdrofi && n config-rofi-Beats-menu.rasi"
 # Rofi Themes Files Access
 a crofitheme="cdrofitheme && n KooL_style-1.rasi"
 
+# Custom scripts
+a hyprland-restart="cdusercustomscripts; bash hyprland-restart.sh"
+
+# Waybar
+a waybar-start="systemctl --user enable --now waybar.service"
+a waybar-stop="killall waybar"
+a waybar-restart="waybar-stop; waybar-start"
+
 # /----- OTHER SHORTCUTS -----/
 
 # Lists
@@ -130,11 +149,16 @@ a img="feh" # View image using Feh software
 a ipconfig="ifconfig"
 a publicip='curl ipinfo.io/ip' # Print public IP address
 a privateip='hostname -I' # Print private IP address
-a ports="s ss -tulpn" # Print all listening ports
-a port="ports | grep" # Print a listening port
+a username="whoami"
 
-# User
-username="whoami"
+# /----- SERVICES -----/
+
+a ctl="s systemctl" # Manage systemd services
+a ctle="ctl enable"
+a ctlr="ctl reload"
+a ctld="ctl disable"
+a ctls="ctl start"
+a ctlst="ctl status"
 
 # /----- CADDY -----/
 
@@ -153,39 +177,31 @@ a caddy-journal="ctlj caddy"
 a caddy-validate="s caddy validate --config $CADDYFILE_PATH"
 a caddy-format="cdcaddy; s caddy fmt --overwrite"
 
-# /----- SERVICES -----/
-
-a ctl="s systemctl" # Manage systemd services
-a ctle="ctl enable" # Enable
-a ctlr="ctl reload" # Reload
-a ctld="ctl disable" # Disable
-a ctls="ctl start" # Start
-
-a ctlst="ctl status" # Status
-a ctlj="s journalctl -xeu" # Print debug logs
 
 # Date
-today='e $(date +%D)' #Today's date
+a today='e $(date +%D)' #Today's date
 
 # /----- DEV -----/
+a dev='cd $HOME/dev'
 
-DEV_PATH="$HOME/dev"
-
-a dev="cd $DEV_PATH"
-
-# /----- FALLOUTDLE -----/
-
-FALLOUTDLE_PATH="$DEV_PATH/falloutdle"
-FALLOUTDLE_RUN_SCRIPT="run.sh"
-FALLOUTDLE_TEST_SCRIPT="run-tests.sh"
-
-a falloutdle='cd $FALLOUTDLE_PATH'
-
-a falloutdle-run='falloutdle; c; bash $FALLOUTDLE_RUN_SCRIPT'
-a frun="falloutdle-run"
-a falloutdle-run-help='frun -h'
+# Falloutdle
+a falloutdle='dev; cd falloutdle'
+a falloutdle-run='c; falloutdle; bash ./run.sh'
+a falloutdle-run-help='falloutdle-run -h'
+a frun='falloutdle-run'
 a frunh="falloutdle-run-help"
 
-a ftest="falloutdle; c; bash $FALLOUTDLE_TEST_SCRIPT"
-a ftesth="ftest -h"
-a ftestv="ftest -v"
+#Mesh
+a mesh='dev; cd Mesh'
+a mesh-run='c; mesh; go run gui/main.go'
+a mrun='mesh-run'
+
+# /----- IUT -----/
+
+a cdiut='dev; cd iut'
+a cddiut="cdiut; cd docker-web-3a"
+
+# Docker
+a dciut="cddiut; dcup --pull always -d --wait"
+a dexeciut="dexec docker-web-3a-server-1 bash"
+a diut="dciut; dexeciut"
