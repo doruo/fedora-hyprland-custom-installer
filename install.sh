@@ -88,6 +88,16 @@ fi
 # /--------------------/ CUSTOM SETUP INTERFACE /--------------------/
 
 # Custom Hyprland config
+CHOICE_CUSTOM_CONFIG=1
+CHOICE_CUSTOM_ALIASES=1
+
+# Dev & softwares
+CHOICE_INSTALL_DEV_SOFT=1
+CHOICE_INSTALL_DEV_LANG=1
+CHOICE_INSTALL_DISCORD=1
+
+CHOICE_REBOOT_AFTER_INSTALL=1
+
 # Ask if the user wants to delete older config
 if whiptail --title "Custom Hyprland config" \
     --yesno "Would you like to use custom Hyprland config ?" \
