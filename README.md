@@ -1,29 +1,3 @@
-# Custom setup for Hyprland on Fedora Linux
+# [Moved to Codeberg](https://codeberg.org/doruo/fedora-hyprland-custom-setup)
 
-### Description
-
-Custom auto installer for [Hyprland](https://hypr.land/) on [Fedora](https://fedoraproject.org/), with integrated whiptail CLI.
-
-Using Jakoolit's [incredible setup](https://github.com/JaKooLit/Fedora-Hyprland).
-
-It's mostly made for my personnal purposes, but I keep it public if some ppl might need it too :)
-
-This script can additionnaly install : 
-
-- Custom keybinds, waybars, aliases, themes, scripts.
-- Wallpapers from amazing artist [pixeljeff](https://www.deviantart.com/pixeljeff).
-- Dev softwares (git, vscode, pgadmin4, postman for now).
-- Dev langages (go, python for now).
-
-### Usage
-
-On a terminal:
-
-```bash
-cd path/to/fedora-hyprland-custom-setup
-bash install.sh
-```
-
-### Work In Progress
-
-Still unstable and some things needs to be corrected.
+fedora-hyprland-custom-setup is now hosted on a non-enshittificated community-driven platform.
