@@ -30,19 +30,21 @@ RELATIVE_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 CUSTOM_CONF_PATH="$RELATIVE_PATH/custom-hypr"
 CONF_PATH="$HOME/.config/hypr"
 
+# Config
 OS="Fedora"
 PACKAGE_MANAGER="dnf"
 YEAR="2025"
+HOST="JaKooLit"
 
-# Jakoolit urls
-JAKOOLIT_REPO="https://github.com/JaKooLit/$OS-Hyprland"
-JAKOOLIT_AUTO_INSTALL="https://raw.githubusercontent.com/JaKooLit/Fedor$OSa-Hyprland/main/auto-install.sh"
+# Urls
+HOST_REPO="https://github.com/$HOST/$OS-Hyprland"
+HOST_REPO_AUTO_INSTALL="https://raw.githubusercontent.com/$HOST/$OS-Hyprland/main/auto-install.sh"
 
 # /--------------------/ INIT /--------------------/
 
 whiptail --title "Doruo custom $OS-Hyprland ($YEAR) Install Script" \
     --msgbox "Welcome to Doruo $OS-Hyprland ($YEAR) Install Script!\n\n\
-Mostly taken from Jakoolit incredible setup: $JAKOOLIT_REPO"\
+Mostly taken from Jakoolit incredible setup: $HOST_REPO"\
     15 80
 
 clear
@@ -59,15 +61,15 @@ UTILITIES="whiptail rsync"
 echo "${INFO} Installing utilities requiered for setup..."
 sudo $PACKAGE_MANAGER install $UTILITIES
 
-# /--------------------/ JAKOOLIT HYPRLAND /--------------------/
+# /--------------------/ HYPRLAND /--------------------/
 
 # Create main directory
 echo "${INFO} Creating $OS-Hyprland directory..."
 mkdir $HOME/$OS-Hyprland
 
-# Install jakoolit
-echo "${INFO} Installing Jakoolit $OS Hyprland..."
-git clone --depth=1 $JAKOOLIT_REPO.git $HOME/$OS-Hyprland
+# Install
+echo "${INFO} Installing $HOST $OS Hyprland..."
+git clone --depth=1 $HOST_REPO.git $HOME/$OS-Hyprland
 cd $HOME/$OS-Hyprland
 chmod +x install.sh
 ./install.sh
