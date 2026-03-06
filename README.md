@@ -2,9 +2,11 @@
 
 ### Description
 
-Custom auto installer for [Hyprland](https://hypr.land/) on [Fedora](https://fedoraproject.org/), with integrated whiptail CLI. Made for personnal purpose.
+Custom auto installer for [Hyprland](https://hypr.land/) on [Fedora](https://fedoraproject.org/), with integrated whiptail CLI.
 
 Using Jakoolit's [incredible setup](https://github.com/JaKooLit/Fedora-Hyprland).
+
+It's mostly made for my personnal purposes, but I keep it public if some ppl might need it too :)
 
 This script can additionnaly install : 
 
